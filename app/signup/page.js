@@ -75,9 +75,11 @@ export default function Signup() {
 
         <div className="media-options">
           <a href="#" className="field google">
-            <img
+           <Image
               src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-              alt=""
+              alt="Google Logo"
+              height= {35}
+              width= {35}   //sus
               className="google-img"
             />
             <span>Signup with Google</span>
