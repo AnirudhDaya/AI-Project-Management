@@ -1,14 +1,16 @@
-"use client";
-import { useRouter } from "next/navigation";
+"use client"
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
-  
-  router.push("/login"); // Redirect to login page on component mount
 
-  // return (
-  //   <div>
-  //     {/* ...other content... */}
-  //   </div>
-  // );
+  useEffect(() => {
+    router.push('/login');
+  }, []); // Ensure redirect happens only after initial render
+
+  return (
+    // Render something meaningful here, even if it's a loading indicator
+    <div>Loading...</div>
+  );
 }
