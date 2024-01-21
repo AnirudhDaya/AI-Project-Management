@@ -155,8 +155,8 @@ a.google span {
   color: #fff; /* Light text color */
 }
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
   .form {
     padding: 20px 10px;
   }
-}
+} */

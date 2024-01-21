@@ -19,8 +19,8 @@ export default function Signup() {
         <Image
           src="/logo.jpg" // Replace with your image path
           alt="Logo"
-          width={200} // Adjust width as needed
-          height={200} // Adjust height as needed
+          width={150} // Adjust width as needed
+          height={150} // Adjust height as needed
         />
       </div>
       <div className="form signup">
