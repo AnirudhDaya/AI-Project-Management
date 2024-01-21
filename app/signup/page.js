@@ -14,7 +14,7 @@ export default function Signup() {
     setShowPassword(!showPassword);
   };
   return (
-    <section className="container forms">
+    <section className="container">
       <div className="image-container">
         <Image
           src="/logo.jpg" // Replace with your image path

@@ -16,9 +16,10 @@
   column-gap: 30px;
 }
 
-    /* .image-container {
-    
-    } */
+.image-container{
+  /* margin-top: 20px; */
+  margin-bottom: -40px;
+}
 
 .form {
   max-width: 430px;
@@ -28,6 +29,7 @@
   background: #333; /* Dark background color */
   color: #fff; /* Light text color */
   /* Add margin to create space between image and form */
+  scale: 0.9;
 }
 
 header {
