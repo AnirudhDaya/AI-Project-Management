@@ -17,11 +17,6 @@
   /* scale: 0.9; */
 }
 
-
-.image-container{
-  /* margin-top: 20px; */
-  margin-bottom: -40px;
-}
 .form {
   max-width: 430px;
   /* max-height: 450px; */
@@ -143,10 +138,9 @@ form {
   justify-content: center;
 }
 
-.google-img{
-    margin-right: 10px;
+.google-img {
+  margin-right: 10px;
 }
-
 
 a.google {
   border: 1px solid #666; /* Dark border color */
