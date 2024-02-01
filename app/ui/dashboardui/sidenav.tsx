@@ -20,7 +20,7 @@ export default function SideNav() {
     });
 
     if (response.status === 200) {
-      router.push("/");
+      router.replace("/");
     }
   }
   return (
