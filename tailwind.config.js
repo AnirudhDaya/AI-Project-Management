@@ -5,7 +5,7 @@ module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    // Or if using `src` directory:
+    // Or if using `src` directory: 
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -153,7 +153,7 @@ module.exports = {
       blueSecondary: '#4318FF',
       brandLinear: '#868CFF',
       gray: {
-        50: '#F5F6FA',
+        50: '#f0f3fd',
         100: '#EEF0F6',
         200: '#DADEEC',
         300: '#C9D0E3',
@@ -165,7 +165,7 @@ module.exports = {
         900: '#1B2559',
       },
       navy: {
-        50: '#d0dcfb',
+        50: '#422bf4',
         100: '#aac0fe',
         200: '#a3b9f8',
         300: '#728fea',
@@ -177,7 +177,7 @@ module.exports = {
         900: '#0b1437',
       },
       red: {
-        50: '#ee5d501a',
+        50: '#ce474c',
         100: '#fee2e2',
         200: '#fecaca',
         300: '#fca5a5',
@@ -237,7 +237,7 @@ module.exports = {
         900: '#365314',
       },
       green: {
-        50: '#05cd991a',
+        50: '#2abe69',
         100: '#dcfce7',
         200: '#bbf7d0',
         300: '#86efac',
@@ -282,7 +282,7 @@ module.exports = {
         600: '#2152ff',
         700: '#1d4ed8',
         800: '#344e86',
-        900: '#00007d',
+        900: '#111a41',
       },
       indigo: {
         50: '#eef2ff',

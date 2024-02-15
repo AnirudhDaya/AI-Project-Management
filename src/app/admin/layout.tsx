@@ -27,7 +27,7 @@ export default function Admin({ children }: { children: React.ReactNode }) {
         {/* Main Content */}
         <main
           className={`mx-2.5  flex-none transition-all dark:bg-navy-900 
-              md:pr-2 xl:ml-[323px]`}
+              md:pr-2 xl:ml-[323px] `}
         >
           {/* Routes */}
           <div>
@@ -36,12 +36,10 @@ export default function Admin({ children }: { children: React.ReactNode }) {
               brandText={getActiveRoute(routes, pathname)}
               secondary={getActiveNavbar(routes, pathname)}
             />
-            <div className="mx-auto min-h-screen p-2 !pt-[10px] md:p-2">
-              {children}
-            </div>
-            <div className="p-3">
-              <Footer />
-            </div>
+              <div className="mx-auto min-h-screen  p-2 !pt-[10px] md:p-2">
+                {children}
+              </div>
+            
           </div>
         </main>
       </div>

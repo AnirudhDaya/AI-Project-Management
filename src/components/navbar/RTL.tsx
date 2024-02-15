@@ -12,12 +12,40 @@ import {
   IoMdInformationCircleOutline,
 } from 'react-icons/io';
 import avatar from '/public/img/avatars/avatar4.png';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useRouter } from 'next/navigation';
+
+async function handlelogout(router: AppRouterInstance){
+  
+  const res = await fetch('/api/login', {
+      method: 'GET',
+    });
+  if(res.status === 200)
+  {
+      const signout = await fetch('http://192.168.29.116:8000/logout/', {
+        method: 'POST',
+        headers: {
+          Authorization: `Token ${res.text}`,
+        },
+      });
+      if(signout.status === 200)
+      {
+        console.log("Logout successful");
+        router.push('/auth/sign-in')
+      }
+  }
+  else
+  {
+    console.log("No session exists");
+  }
+}
 
 const Navbar = (props: { brandText: string; [x: string]: any }) => {
   const { onOpenSidenav, brandText, mini, hovered } = props;
-  const [darkmode, setDarkmode] = React.useState(
-    document.body.classList.contains('dark'),
-  );
+  // const [darkmode, setDarkmode] = React.useState(
+  //   document.body.classList.contains('dark'),
+  // );
+  const router  = useRouter();
   return (
     <nav
       className={`duration-175 linear fixed left-3 top-3 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/30 transition-all ${
@@ -165,7 +193,7 @@ const Navbar = (props: { brandText: string; [x: string]: any }) => {
             </a>
           </div>
         </Dropdown>
-        <div
+        {/* <div
           className="cursor-pointer text-gray-600"
           onClick={() => {
             if (darkmode) {
@@ -182,7 +210,7 @@ const Navbar = (props: { brandText: string; [x: string]: any }) => {
           ) : (
             <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
-        </div>
+        </div> */}
         {/* Profile & Dropdown */}
         <Dropdown
           button={
@@ -220,7 +248,7 @@ const Navbar = (props: { brandText: string; [x: string]: any }) => {
                 Newsletter Settings
               </a>
               <a
-                href=" "
+                onClick={()=>{handlelogout(router)}}
                 className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
               >
                 Log Out

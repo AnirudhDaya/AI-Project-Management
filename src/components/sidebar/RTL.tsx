@@ -28,13 +28,13 @@ function SidebarHorizon(props: { variant?: string; [x: string]: any }) {
       } duration-175 linear fixed !z-50 min-h-full transition-all md:!z-50 lg:!z-50 xl:!z-0 ${
         variant === 'auth' ? 'xl:hidden' : 'xl:block'
       } ${open ? '' : '-translate-x-[105%] xl:translate-x-[unset]'}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      // onMouseEnter={() => setHovered(true)}
+      // onMouseLeave={() => setHovered(false)}
     >
       <Card
         extra={`mr-3 w-full h-[96.5vh] sm:ml-4 sm:my-4 m-7 !rounded-[20px]`}
       >
-        {/* @ts-expect-error */}
+       
         <Scrollbars
           autoHide
           renderTrackVertical={renderTrack}

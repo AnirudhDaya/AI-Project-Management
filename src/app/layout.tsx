@@ -5,7 +5,8 @@ import AppWrappers from './AppWrappers';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    // <html lang="en" >
+    <html lang="en"className="dark" >
       <body id={'root'}>
         <AppWrappers>{children}</AppWrappers>
       </body>

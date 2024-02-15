@@ -3,6 +3,7 @@ import CardMenu from 'components/card/CardMenu';
 import Card from 'components/card';
 import Progress from 'components/progress';
 import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger,DropdownMenuLabel } from 'components/dropdownMenu/DropdownMenu';
 
 import {
   createColumnHelper,
@@ -12,12 +13,14 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import Checkbox from 'components/checkbox';
 
 type RowObj = {
   name: string;
   status: string;
-  date: string;
-  progress: number;
+  teamMembers: string;
+  documents: string;
+  
 };
 
 const columnHelper = createColumnHelper<RowObj>();
@@ -31,13 +34,33 @@ export default function ComplexTable(props: { tableData: any }) {
     columnHelper.accessor('name', {
       id: 'name',
       header: () => (
-        <p className="text-sm font-bold text-gray-600 dark:text-white">NAME</p>
-      ),
-      cell: (info) => (
-        <p className="text-sm font-bold text-navy-700 dark:text-white">
-          {info.getValue()}
+        <p className="text-sm font-bold text-gray-600 dark:text-white">
+          PROJECT
         </p>
       ),
+      cell: (info) => {
+        
+        const cellValue = info.getValue();
+        const truncatedValue = cellValue.length > 15 ? cellValue.substring(0, 15) + '...' : cellValue;
+    
+        return (
+          <div className="flex items-center">
+          <Checkbox
+            defaultChecked={info.getValue()[1]}
+            colorScheme="brandScheme"
+            me="10px"
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger className="ml-3 text-sm font-bold text-navy-700 dark:text-white cursor-pointer">
+              {truncatedValue}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>{cellValue}</DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          </div>
+        );
+      },
     }),
     columnHelper.accessor('status', {
       id: 'status',
@@ -50,9 +73,9 @@ export default function ComplexTable(props: { tableData: any }) {
         <div className="flex items-center">
           {info.getValue() === 'Approved' ? (
             <MdCheckCircle className="me-1 text-green-500 dark:text-green-300" />
-          ) : info.getValue() === 'Disable' ? (
+          ) : info.getValue() === 'Rejected' ? (
             <MdCancel className="me-1 text-red-500 dark:text-red-300" />
-          ) : info.getValue() === 'Error' ? (
+          ) : info.getValue() === 'Under Review' ? (
             <MdOutlineError className="me-1 text-amber-500 dark:text-amber-300" />
           ) : null}
           <p className="text-sm font-bold text-navy-700 dark:text-white">
@@ -61,27 +84,39 @@ export default function ComplexTable(props: { tableData: any }) {
         </div>
       ),
     }),
-    columnHelper.accessor('date', {
-      id: 'date',
+    columnHelper.accessor('teamMembers', {
+      id: 'teamMembers',
       header: () => (
-        <p className="text-sm font-bold text-gray-600 dark:text-white">DATE</p>
-      ),
-      cell: (info) => (
-        <p className="text-sm font-bold text-navy-700 dark:text-white">
-          {info.getValue()}
+        <p className="text-sm font-bold text-gray-600 dark:text-white">
+          TEAM MEMBERS
         </p>
       ),
+      cell: (info) => {
+        const cellValue = info.getValue();
+        const truncatedValue = cellValue.length > 15 ? cellValue.substring(0, 15) + '...' : cellValue;
+    
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="text-sm font-bold text-navy-700 dark:text-white cursor-pointer">
+              {truncatedValue}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>{cellValue}</DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
     }),
-    columnHelper.accessor('progress', {
+    columnHelper.accessor('documents', {
       id: 'progress',
       header: () => (
         <p className="text-sm font-bold text-gray-600 dark:text-white">
-          PROGRESS
+          DOCUMENTS
         </p>
       ),
       cell: (info) => (
         <div className="flex items-center">
-          <Progress width="w-[108px]" value={info.getValue()} />
+          {info.getValue()}
         </div>
       ),
     }),

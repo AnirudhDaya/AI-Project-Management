@@ -14,6 +14,36 @@ import {
 } from 'react-icons/io';
 import avatar from '/public/img/avatars/avatar4.png';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
+async function handlelogout(router: AppRouterInstance){
+  
+  const res = await fetch('/api/login', {
+      method: 'GET',
+    });
+    if(res.status === 200)
+    {
+      const val  = await res.json();
+      console.log(val.token.value);
+      const signout = await fetch('http://192.168.29.116:8000/logout/', {
+        method: 'POST',
+        headers: {
+          Authorization: `Token ${val.token.value}`,
+        },
+      });
+      if(signout.status === 200)
+      {
+        console.log("Logout successful");
+        router.push('/auth/sign-in')
+      }
+  }
+  else
+  {
+    console.log("No session exists");
+  }
+}
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
@@ -22,9 +52,10 @@ const Navbar = (props: {
   [x: string]: any;
 }) => {
   const { onOpenSidenav, brandText, mini, hovered } = props;
-  const [darkmode, setDarkmode] = React.useState(
-    document.body.classList.contains('dark'),
-  );
+  // const [darkmode, setDarkmode] = React.useState(
+  //   document.body.classList.contains('dark'),
+  // );
+  const router =  useRouter();
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
@@ -123,7 +154,7 @@ const Navbar = (props: {
           </div>
         </Dropdown>
         {/* start Horizon PRO */}
-        <Dropdown
+        {/* <Dropdown
           button={
             <p className="cursor-pointer">
               <IoMdInformationCircleOutline className="h-4 w-4 text-gray-600 dark:text-white" />
@@ -163,8 +194,8 @@ const Navbar = (props: {
               Try Horizon Free
             </a>
           </div>
-        </Dropdown>
-        <div
+        </Dropdown> */}
+        {/* <div
           className="cursor-pointer text-gray-600"
           onClick={() => {
             if (darkmode) {
@@ -181,7 +212,7 @@ const Navbar = (props: {
           ) : (
             <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
-        </div>
+        </div> */}
         {/* Profile & Dropdown */}
         <Dropdown
           button={
@@ -218,12 +249,12 @@ const Navbar = (props: {
               >
                 Newsletter Settings
               </a>
-              <a
-                href=" "
+              <button
+                onClick={()=>{handlelogout(router)}}
                 className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
               >
                 Log Out
-              </a>
+              </button>
             </div>
           </div>
         </Dropdown>

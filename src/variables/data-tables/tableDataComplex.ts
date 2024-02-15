@@ -1,34 +1,41 @@
 type RowObj = {
   name: string;
   status: string;
-  date: string;
-  progress: number;
+  teamMembers: string;
+  documents: string;
 };
 
 const tableDataComplex: RowObj[] = [
   {
-    name: 'Horizon UI PRO',
-    progress: 75.5,
+    name: 'AI Project Management Tool',
+    documents: "Report",
     status: 'Approved',
-    date: '12 Jan 2021',
+    teamMembers: '12 Jan 2021',
   },
   {
-    name: 'Horizon UI Free',
-    progress: 25.5,
-    status: 'Disable',
-    date: '21 Feb 2021',
+    name: 'AI Project Management Tool',
+    documents: "Report",
+    status: 'Rejected',
+    teamMembers: '12 Jan 2021',
   },
   {
-    name: 'Weekly Update',
-    progress: 90,
-    status: 'Error',
-    date: '13 Mar 2021',
+    name: 'AI Project Management Tool',
+    documents: "Report",
+    status: 'Under Review',
+    teamMembers: '12 Jan 2021',
   },
   {
-    name: 'Marketplace',
-    progress: 50.5,
+    name: 'AI Project Management Tool',
+    documents: "Report",
     status: 'Approved',
-    date: '24 Oct 2022',
+    teamMembers: 'Anirudh Dayanandan, Fahad Puzhakkaraillath Noushad, Martin James Purathur',
   },
+  {
+    name: 'AI Project Management Tool',
+    documents: "Report",
+    status: 'Approved',
+    teamMembers: '12 Jan 2021',
+  },
+ 
 ];
 export default tableDataComplex;
