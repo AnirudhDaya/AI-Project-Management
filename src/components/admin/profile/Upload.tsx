@@ -2,13 +2,14 @@ import { useState } from "react";
 import { MdFileUpload, MdCancel } from "react-icons/md";
 import Card from "components/card";
 
-const Upload = () => {
+const Upload = ({onFileSelect}) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type === "text/csv") {
       setSelectedFile(file);
+      onFileSelect(event.target.files[0]);
     } else {
       setSelectedFile(null);
       alert("Please select a CSV file.");

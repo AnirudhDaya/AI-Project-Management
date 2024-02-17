@@ -27,7 +27,7 @@ async function handlelogout(router: AppRouterInstance){
     {
       const val  = await res.json();
       console.log(val.token.value);
-      const signout = await fetch('http://192.168.29.116:8000/logout/', {
+      const signout = await fetch('https://pmt-inajc.ondigitalocean.app/logout/', {
         method: 'POST',
         headers: {
           Authorization: `Token ${val.token.value}`,

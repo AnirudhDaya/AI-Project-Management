@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   const sessionToken = request.cookies.get('token')?.value || '';
 
   if(isPublicPath && sessionToken){
-    const res = await fetch('http://192.168.29.116:8000/userdetails/', {
+    const res = await fetch('https://pmt-inajc.ondigitalocean.app/userdetails/', {
       method: 'POST',
       headers: {
         Authorization: `Token ${sessionToken}`,

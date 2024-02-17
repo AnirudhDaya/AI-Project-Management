@@ -22,7 +22,7 @@ async function handlelogout(router: AppRouterInstance){
     });
   if(res.status === 200)
   {
-      const signout = await fetch('http://192.168.29.116:8000/logout/', {
+      const signout = await fetch('https://pmt-inajc.ondigitalocean.app/logout/', {
         method: 'POST',
         headers: {
           Authorization: `Token ${res.text}`,

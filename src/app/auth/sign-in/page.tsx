@@ -17,7 +17,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 export async function handleSignIn(username: string, password: string, router: AppRouterInstance) {
   
   try {
-    const response = await fetch('http://192.168.29.116:8000/login/', {
+    const response = await fetch('https://pmt-inajc.ondigitalocean.app/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

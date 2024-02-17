@@ -8,10 +8,15 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ closeModal }) => {
   const [modalHeight, setModalHeight] = useState("");
   const [className, setClassName] = useState("");
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
   const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
+
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file); 
+  }
 
   const handleOutsideClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -39,9 +44,60 @@ const Modal: React.FC<ModalProps> = ({ closeModal }) => {
     setClassName(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Handle submission logic here
-    console.log("Class name:", className);
+    if (!className) {
+      // Handle missing class name error
+      return;
+    }
+  
+    // Validate class name (e.g., length, allowed characters)
+  
+    if (!selectedFile) {
+      // Handle missing CSV file error
+      return;
+    }
+  
+   // Set loading indicator (optional)
+  
+    try {
+      const formData = new FormData();
+      console.log('className', className);
+      console.log('csvFile', selectedFile);
+      formData.append('class', className);
+      formData.append('csv_file', selectedFile);
+      
+      const res = await fetch('/api/login', {
+        method: 'GET',
+      });
+      if(res.status === 200) {
+        const val  = await res.json();
+        console.log("Token val", val.token.value);
+        const response = await fetch('https://pmt-inajc.ondigitalocean.app/create_class/', {
+          method: 'POST',
+          headers: {
+            Authorization: `Token ${val.token.value}`,
+          },
+          body: formData,
+        });
+    
+        if (response.ok) {
+          console.log('Class added successfully!');
+          closeModal();
+          // Optionally, update the class list on the dashboard
+        } else {
+          // error = await response.json(); // Store API error messages
+        }
+      }
+      else {
+        console.log("No session exists");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle other errors (e.g., network errors)
+    } finally {
+       // Hide loading indicator (optional)
+    }
     // Close modal
     closeModal();
   };
@@ -87,7 +143,7 @@ const Modal: React.FC<ModalProps> = ({ closeModal }) => {
                 />
               </div>
               <div className="mt-4 overflow-hidden">
-                <Upload />
+              <Upload onFileSelect={handleFileSelect} />
               </div>
               <div className="mt-4 flex justify-end">
                 <button
